@@ -23,5 +23,5 @@ bibtex: |
 bibliography: ../references.bib
 
 format: commonmark
-markdown:
+commonmark:
   path: content.md
