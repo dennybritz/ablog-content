@@ -29,6 +29,12 @@ It's important to note that ablog-svelte is a **static site generator**. This me
 
 Most people want to use local files as blog content. So that's why we will be using [`ablog-api-local`](https://github.com/dennybritz/ablog-api-local), which is a simple binary that monitors local files and exposes them via an API. It also handles transformations via [pandoc](https://pandoc.org/). This means you can write your blog posts in Markdown, Jupyter, or any other pandoc-compatible format.
 
+To get some example content you can clone the [`ablog-content`](https://github.com/dennybritz/ablog-content) repo, which also contains this readme.
+
+```bash
+git clone https://github.com/dennybritz/ablog-content content/
+```
+
 So, let's start with writing something:
 
 ```bash
@@ -47,14 +53,13 @@ touch content/my-first-post/build.yaml
 title: My first Post
 date: "2020-03-03"
 
-format: pandoc
 pandoc:
   # Anything below here are just options passed to pandoc
   # see https://pandoc.org/MANUAL.html#default-files
   input-files: my-first-post.md
 ```
 
-Here, we use pandoc to transform out markdown file to HTML. Most likely this is what you will use most often since it can handle all kinds of file formats. You can read the [`ablog-api-local README`](https://github.com/dennybritz/ablog-api-local) for more options. Since we've specified `my-first-post.md` as our input file, let's create it and write something:
+Here, we use pandoc to transform out markdown file to HTML. This is the default because it can handle all kinds of file formats. You can read the [`ablog-api-local README`](https://github.com/dennybritz/ablog-api-local) for more options. Since we've specified `my-first-post.md` as our input file, let's create it and write something:
 
 ```bash
 echo "This is a **Markdown** post!" > content/my-first-post/my-first-post.md

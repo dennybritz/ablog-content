@@ -17,4 +17,4 @@ bibtex: |
 
 pandoc:
   input-files:
-    - ../README.md
+    - README.md
