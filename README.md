@@ -35,49 +35,51 @@ To get some example content you can clone the [`ablog-content`](https://github.c
 git clone https://github.com/dennybritz/ablog-content content/
 ```
 
-So, let's start with writing something:
-
-```bash
-# Create a new content directory
-# It doesn't matter where you create this
-mkdir -p content/my-first-post
-```
-
-The way `ablog-api-local` finds content is by looking for `build.yaml` files. Each post has a `build.yaml` that contains metadata, such as title and date and the format. Let's start with a simple one:
-
-```bash
-touch content/my-first-post/build.yaml
-```
+The way `ablog-api-local` finds content is by looking for `build.yaml` files. Each post corresponds to a `build.yaml` that contains metadata like title and date. For example, the build file for this README is [here](https://github.com/dennybritz/ablog-content/blob/master/build.yaml).
 
 ```yaml
-title: My first Post
-date: "2020-03-03"
+title: README
+date: "2020-05-11"
+description: |
+  Documentation for setting up ablog. Of course, written using ablog itself.
+slug: "readme"
+authors:
+  - name: Denny Britz
+    email: "dennybritz@gmail.com"
+    url: https://twitter.com/dennybritz
+bibtex: |
+  ...
 
 pandoc:
-  # Anything below here are just options passed to pandoc
-  # see https://pandoc.org/MANUAL.html#default-files
-  input-files: my-first-post.md
+  input-files:
+    - README.md
 ```
 
-Here, we use pandoc to transform out markdown file to HTML. This is the default because it can handle all kinds of file formats. You can read the [`ablog-api-local README`](https://github.com/dennybritz/ablog-api-local) for more options. Since we've specified `my-first-post.md` as our input file, let's create it and write something:
-
-```bash
-echo "This is a **Markdown** post!" > content/my-first-post/my-first-post.md
-```
-
-Then, start a local development server.
+Note that we use pandoc to transform our markdown file into HTML. This is the default. You can read the [`ablog-api-local README`](https://github.com/dennybritz/ablog-api-local) for more options.Next, let's a local development server.
 
 ```bash
 # this directory will be searched and monitored for new content
 export ABLOG_CONTENT_DIR="content/"
 
+# Run everything in docker
 docker-compose up dev
+
+# OR if you prefer to run the webserver locally to use live-reload
+# you can run only the api in Docker
+docker-compose up api
+yarn dev
 ```
 
-You can now visit your website at `localhost:3000`. To add more content, check out some of the examples in the [ablog-content](https://github.com/dennybritz/ablog-content) repo. This README you are reading right now is one of them.
+You should now be able to visit the website at `localhost:3000`. To add more content, check out more of the examples in the [ablog-content](https://github.com/dennybritz/ablog-content) repo.
 
 ### Exporting your Site
 
-```
+Using [sapper's export](https://sapper.svelte.dev/docs/#Exporting) functionality you can export your static site into the `__sapper__` folder:
+
+```bash
+# In docker
 docker-compose run export
+
+# OR locally
+yarn export
 ```
