@@ -15,7 +15,6 @@ bibtex: |
     url={https://ablog-svelte.com/blog/readme},
   }
 
-format: pandoc
 pandoc:
   input-files:
     - ../README.md

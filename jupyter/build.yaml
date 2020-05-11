@@ -21,7 +21,6 @@ bibtex: |
   }
 bibliography: ../references.bib
 
-format: pandoc
 pandoc:
   input-files:
     - content.ipynb
