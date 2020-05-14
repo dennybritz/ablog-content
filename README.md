@@ -12,7 +12,7 @@
 
 ## Getting Started
 
-The following walks you through setting up a local development environment and deploying a copy of this site to your own Github pages.
+The following walks you through setting up a local development environment and deploying a copy of this site to Netlify.
 
 Requirements:
 
@@ -79,14 +79,15 @@ pandoc:
     - README.md
 ```
 
-Check the [`ablog-api-local README`](https://github.com/dennybritz/ablog-api-local) for more metadata options. To add more content, simply add more `build.yaml` files to your `content/` folder. There are several examples you can copy from.
+Check the [`ablog-api-local README`](https://github.com/dennybritz/ablog-api-local) for more metadata options. To add more content, just add more `build.yaml` files to your `content/` folder. There are already several examples you can copy from.
 
-Next, let's deploy your site to Github pages.
+Next, let's deploy our site to [Netlify](https://netlify.com/), a popular free static site host. Assuming you have the Netlify CLI installed, create a new site (you can also do this from the web interface).
 
+```bash
+netlify sites:create
+```
 
-### Exporting your Site
-
-Using [sapper's export](https://sapper.svelte.dev/docs/#Exporting) functionality you can export your static site into the `__sapper__` folder:
+Then, using [sapper's export](https://sapper.svelte.dev/docs/#Exporting) functionality we export a static version of the site into the `__sapper__/export` folder:
 
 ```bash
 # In docker
@@ -96,3 +97,12 @@ docker-compose run export
 yarn export
 ```
 
+Now you can deploy this site to production with:
+
+```bash
+netlify deploy --prod -d __sapper__/export/
+```
+
+The deployment process can be automated using a CI service such as Github Actions. For an example, you can look at [this worklow for this site](https://github.com/dennybritz/ablog-svelte/blob/master/.github/workflows/deploy.yaml).
+
+Of course, you can also deploy the site to other static hosting providers, such as Github Pages, by using the static HTML generated in `__sapper__/export`.
